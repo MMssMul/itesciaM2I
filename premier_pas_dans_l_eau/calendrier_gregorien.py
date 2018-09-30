@@ -92,23 +92,28 @@ def getIndexOfDay(date):
 # Corps du programme
 def main():
     str_saisie = "Saisir une date gregorienne au format 'dd/mm/yyyy' >= 01/11/1582\n"
+    str_info = "Pour quitter, saisissez le mot 'fin'\n"
+    str_utilisateur = "\nVous : "
+    str_affichage = str_saisie+str_info+str_utilisateur
+    date = ""
 
-    # Saisie de la date par l'utilisateur
-    date = input(str_saisie)
+    while(date!="fin"):
+        # Saisie de la date par l'utilisateur
+        date = input(str_affichage)
+        if(date!="fin"):
+            isDate = isDateGreg(date)
+            if(isDate==2):
+                print('\nLa date saisie n\'est pas une date gregorienne !\n')
+            elif(isDate==0):
+                print('\nLa saisie est incorrecte !\n')
+            else:
+                # Liste des jours de la semaine
+                days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
 
-    # Boucle sur la saisie si la saisie est erronee
-    while(isDateGreg(date)!=1):
-        if(isDateGreg(date)==2):
-            print('\nLa date saisie n\'est pas une date gregorienne !')
-        else:
-            print('\nLa saisie est incorrecte !')
-        date = input(str_saisie)
+                # Affichage du jour de la semaine
+                print('\nLe '+str(date)+' est un '+days[getIndexOfDay(date)]+'.\n')
 
-    # Liste des jours de la semaine
-    days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']
-
-    # Affichage du jour de la semaine
-    print('Jour => ',days[getIndexOfDay(date)])
+    print('A bientôt !')
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -#
 
