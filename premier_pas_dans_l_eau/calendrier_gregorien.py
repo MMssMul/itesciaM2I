@@ -10,12 +10,12 @@ import re  # bibliotheque pour expressions regulieres
 # @param string
 # @return 0 = pas une date, 1 = date gregorinne, 2 = date non gregorienne
 def isDateGreg(str):
-    if(re.sub('^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/][0-9]{4}$', "", str)):
-        return 0  # n'est pas une date
-    substr = str.split('/')
-    if (int(substr[2]) > 1582 or (int(substr[2]) == 1582 and int(substr[1]) >= 11)):
-        return 1  # est une date gregorienne
-    return 2  # est une date
+    if(re.match('^(?:(?:(?:0[1-9]|1\d|2[0-8])\/(?:0[1-9]|1[0-2])|(?:29|30)\/(?:0[13-9]|1[0-2])|31\/(?:0[13578]|1[02]))\/[1-9]\d{3}|29\/02(?:\/[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00))$', str)):
+        substr = str.split('/')
+        if (int(substr[2]) > 1582 or (int(substr[2]) == 1582 and int(substr[1]) >= 11)):
+            return 1  # est une date gregorienne
+        return 2  # est une date
+    return 0  # n'est pas une date
 
 # Verifie si une l'annee passee en parametre est bissextile
 # @param year
@@ -91,7 +91,7 @@ def getIndexOfDay(date):
 
 # Corps du programme
 def main():
-    str_saisie = "Saisir une date gregorienne au format 'dd/mm/yyyy' >= [0]1/11/1582\n"
+    str_saisie = "Saisir une date gregorienne au format 'dd/mm/yyyy' >= 01/11/1582\n"
 
     # Saisie de la date par l'utilisateur
     date = input(str_saisie)
