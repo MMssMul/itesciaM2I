@@ -19,7 +19,7 @@ class TestMail():
         server.ehlo()
         server.starttls()
         server.ehlo()
-        server.login("snexonnoreply@gmail.com", "snexon123")
+        server.login("jeremy.webtarget@gmail.com", "webtarget")
         for d in dest:
             message = MIMEMultipart()
             message['From'] = exp
